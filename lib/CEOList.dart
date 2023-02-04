@@ -21,7 +21,7 @@ class _CeoState extends State<Ceo> {
     "Jeff Bezos",
     "Mukesh Ambani",
     "Tim Cook",
-    "Shantanu Narayen",
+    "Shantanu Narayan",
     "Daniel Zhang",
     "Harald Kruger",
     "Michael Dell",
@@ -42,7 +42,29 @@ class _CeoState extends State<Ceo> {
   ];
 
   List images = [
-    
+    "assets/images/SunderPichai.jpg",
+    "assets/images/BillGates.jpg",
+    "assets/images/jeffbezos.jpg",
+    "assets/images/mukeshambani.jpg",
+    "assets/images/TimCook.jpg",
+    "assets/images/ShantanuNarayen.jpg",
+    "assets/images/Daniel.jpg",
+    "assets/images/haraldkrueger.jpg",
+    "assets/images/michaeldell.jpg",
+    "assets/images/BobSwan.jpg",
+  ];
+
+  List mycolor = [
+    Color(0xff175375),
+    Color(0xff2EA9EC),
+    Color(0xff175375),
+    Color(0xff2EA9EC),
+    Color(0xff175375),
+    Color(0xff2EA9EC),
+    Color(0xff175375),
+    Color(0xff2EA9EC),
+    Color(0xff175375),
+    Color(0xff2EA9EC),
   ];
 
   @override
@@ -58,28 +80,52 @@ class _CeoState extends State<Ceo> {
           centerTitle: true,
           backgroundColor: c1,
         ),
-        body: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Colors.blue,
-                Colors.indigo,
-                Colors.purple,
-              ],
-            ),
-          ),
-          child: Column(
-            children: [
-              ListTile(
-                title: Text(
-                  "Sunder Pichai",
-                  style: TextStyle(fontSize: 17, color: Colors.white),
+        body: Stack(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Colors.blue,
+                    Colors.indigo,
+                    Colors.purple,
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+            ListView.builder(
+              itemCount: CEOname.length, physics: BouncingScrollPhysics(),
+
+              itemBuilder: (context, index) {
+                return CEOwiget(images[index], CEOname[index], Company[index],
+                    mycolor[index]);
+              },),
+          ],
         ),
       ),
     );
   }
+
+  Widget CEOwiget(String img, String n2, String com, Color cl1) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ListTile(
+        leading: CircleAvatar(
+          radius: 30.0,
+          backgroundImage: AssetImage("$img"),
+        ),
+        title: Text(n2),
+        subtitle: Text(com),
+        tileColor: cl1,
+        contentPadding: EdgeInsets
+            .all(5),
+        trailing:
+        Icon(Icons.arrow_circle_right),
+        shape: OutlineInputBorder(borderRadius:
+        BorderRadius.circular(18)),),
+    );
+
+
+  }
+
 }
